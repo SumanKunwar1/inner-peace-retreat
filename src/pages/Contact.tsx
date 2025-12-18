@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,15 +27,55 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
     
+    const templateParams: any = {
+      form_type: formType === "register" ? "Retreat Registration" : "General Inquiry",
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || 'Not provided',
+      country: formData.get('country'),
+      inquiryType: formData.get('inquiryType') || formData.get('accommodation') || 'Registration',
+      message: formData.get('message') || 'Not provided',
+      roles: 'N/A',
+    };
+
+    // Add registration-specific fields
     if (formType === "register") {
-      toast.success("Registration submitted! We'll contact you with confirmation details shortly.");
-    } else {
-      toast.success("Thank you for your message! We'll respond within 24 hours.");
+      const accommodation = formData.get('accommodation');
+      const dietary = formData.get('dietary');
+      const experience = formData.get('experience');
+      
+      templateParams.message = `
+Accommodation: ${accommodation}
+Dietary Requirements: ${dietary}
+Meditation Experience: ${experience}
+
+Additional Information:
+${formData.get('message') || 'None provided'}
+      `.trim();
     }
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+
+    try {
+      await emailjs.send(
+        'service_nrpjlk2',
+        'template_5ivkjpi',
+        templateParams,
+        '6uTaZNVAqe2im1A5W'
+      );
+      
+      if (formType === "register") {
+        toast.success("Registration submitted! We'll contact you with confirmation details shortly.");
+      } else {
+        toast.success("Thank you for your message! We'll respond within 24 hours.");
+      }
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast.error("Failed to submit. Please try again or contact us directly at info@ngyungne.org");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

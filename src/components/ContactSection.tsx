@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 export function ContactSection() {
   const ref = useRef(null);
@@ -16,12 +17,35 @@ export function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
     
-    toast.success("Thank you for your message! We'll respond shortly.");
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+    const templateParams = {
+      form_type: "Homepage Contact Form",
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || 'Not provided',
+      country: formData.get('country') || 'Not provided',
+      inquiryType: formData.get('inquiryType'),
+      message: formData.get('message'),
+      roles: 'N/A',
+    };
+
+    try {
+      await emailjs.send(
+        'service_nrpjlk2',
+        'template_5ivkjpi',
+        templateParams,
+        '6uTaZNVAqe2im1A5W'
+      );
+      
+      toast.success("Thank you for your message! We'll respond shortly.");
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast.error("Failed to send message. Please try again or email us directly at info@ngyungne.org");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

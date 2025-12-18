@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 const volunteerRoles = [
   {
@@ -92,12 +93,37 @@ const Volunteer = () => {
     }
     
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    const formData = new FormData(e.currentTarget);
     
-    toast.success("Thank you for volunteering! We'll be in touch soon with more details.");
-    setIsSubmitting(false);
-    setSelectedRoles([]);
-    (e.target as HTMLFormElement).reset();
+    const templateParams = {
+      form_type: "Volunteer Application",
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || 'Not provided',
+      country: formData.get('country'),
+      roles: selectedRoles.join(', '),
+      message: formData.get('experience') || 'Not provided',
+      inquiryType: 'Volunteer',
+    };
+
+    try {
+      await emailjs.send(
+        'service_nrpjlk2',
+        'template_5ivkjpi',
+        templateParams,
+        '6uTaZNVAqe2im1A5W'
+      );
+      
+      toast.success("Thank you for volunteering! We'll be in touch soon with more details.");
+      setSelectedRoles([]);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast.error("Failed to submit application. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -159,7 +185,7 @@ const Volunteer = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => toggleRole(role.title)}
-                    className={`p-6 rounded-xl text-left transition-all ${
+                    className={`p-6 rounded-xl text-left transition-all relative ${
                       selectedRoles.includes(role.title)
                         ? "bg-primary/10 border-2 border-primary shadow-soft"
                         : "bg-card border-2 border-transparent shadow-soft hover:border-primary/30"
