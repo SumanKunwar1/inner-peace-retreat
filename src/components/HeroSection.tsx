@@ -159,20 +159,20 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
             <Button
-              size="xl"
+              size="lg"
               variant="hero"
-              className="font-sans font-semibold"
+              className="font-sans font-semibold text-base"
               asChild
             >
               <a href="#register">Register for the Retreat</a>
             </Button>
             <Button
-              size="xl"
+              size="lg"
               variant="heroOutline"
-              className="font-sans"
+              className="font-sans text-base"
               asChild
             >
               <a href="#about">Learn About Ngyungne</a>
