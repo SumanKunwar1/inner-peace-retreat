@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 const donationAmounts = [
   { value: 500, label: "Rs. 500" },
@@ -96,17 +97,12 @@ const Donate = () => {
         return;
       }
       setUploadedFile(file);
-      toast.success("Payment screenshot uploaded");
+      toast.success("Payment screenshot selected");
     }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if (!uploadedFile) {
-      toast.error("Please upload payment screenshot");
-      return;
-    }
 
     const finalAmount = customAmount || selectedAmount;
     if (!finalAmount) {
@@ -115,16 +111,60 @@ const Donate = () => {
     }
     
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success("Thank you for your generous donation! We'll verify the payment and send you a confirmation.");
-    setIsSubmitting(false);
-    setSelectedAmount(null);
-    setCustomAmount("");
-    setUploadedFile(null);
-    (e.target as HTMLFormElement).reset();
+
+    try {
+      // Get form element to extract data
+      const form = e.currentTarget;
+      const nameInput = form.querySelector('input[name="name"]') as HTMLInputElement;
+      const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+      const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement;
+      const countryInput = form.querySelector('input[name="country"]') as HTMLInputElement;
+      const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+      
+      const name = nameInput?.value?.trim() || 'Not provided';
+      const email = emailInput?.value?.trim() || 'Not provided';
+      const phone = phoneInput?.value?.trim() || 'Not provided';
+      const country = countryInput?.value?.trim() || 'Not provided';
+      const message = messageInput?.value?.trim() || 'No message provided';
+
+      // Prepare email template parameters - matching your EmailJS template
+      const templateParams = {
+        form_type: "Donation",
+        name: name,
+        email: email,
+        phone: phone,
+        country: country,
+        amount: finalAmount,
+        message: message,
+        payment_screenshot: uploadedFile ? `Screenshot uploaded: ${uploadedFile.name}` : 'No screenshot uploaded',
+        inquiryType: 'Donation',
+        roles: 'N/A',
+      };
+
+      console.log('Sending email with params:', templateParams);
+
+      // Send email via EmailJS with actual credentials
+      await emailjs.send(
+        'service_nczn8lb',         // Service ID
+        'template_gqft0pl',        // Template ID
+        templateParams,
+        '1IZNzW0SEcxwH5XqA'        // Public Key
+      );
+      
+      toast.success("Thank you for your generous donation! We'll verify the payment and send you a confirmation.");
+      
+      // Reset form
+      setSelectedAmount(null);
+      setCustomAmount("");
+      setUploadedFile(null);
+      form.reset();
+      
+    } catch (error) {
+      console.error('Submission Error:', error);
+      toast.error("Failed to submit donation. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -428,7 +468,7 @@ const Donate = () => {
                   {/* File Upload */}
                   <div className="space-y-2">
                     <label className="font-sans text-sm font-medium text-foreground">
-                      Upload Payment Screenshot *
+                      Upload Payment Screenshot (Optional)
                     </label>
                     <div className="relative">
                       <input
@@ -437,7 +477,6 @@ const Donate = () => {
                         onChange={handleFileUpload}
                         className="hidden"
                         id="payment-screenshot"
-                        required
                       />
                       <label
                         htmlFor="payment-screenshot"
@@ -503,4 +542,4 @@ const Donate = () => {
   );
 };
 
-export default Donate; 
+export default Donate;
