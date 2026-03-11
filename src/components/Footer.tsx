@@ -9,7 +9,7 @@ const footerLinks = {
     { label: "Our Teachers", href: "/about" },
   ],
   event: [
-    { label: "Event 2025", href: "/event" },
+    { label: "Event", href: "/event" },
     { label: "Schedule", href: "/event" },
     { label: "Register", href: "/contact" },
     { label: "Volunteer", href: "/volunteer" },

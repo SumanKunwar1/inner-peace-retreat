@@ -68,7 +68,7 @@ export function EventSection() {
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center gap-2 bg-primary-foreground/20 backdrop-blur-sm rounded-lg px-4 py-2">
                     <Calendar className="w-5 h-5 text-secondary" />
-                    <span className="font-sans text-sm">Dec 28 - Jan 4</span>
+                    <span className="font-sans text-sm">8-24 December, 2026</span>
                   </div>
                   <div className="flex items-center gap-2 bg-primary-foreground/20 backdrop-blur-sm rounded-lg px-4 py-2">
                     <MapPin className="w-5 h-5 text-secondary" />

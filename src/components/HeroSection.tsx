@@ -11,7 +11,7 @@ interface TimeLeft {
   seconds: number;
 }
 
-const eventDate = new Date("2025-12-28T00:00:00");
+const eventDate = new Date("2026-12-28T00:00:00");
 
 export function HeroSection() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -81,7 +81,7 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 bg-secondary/90 text-secondary-foreground px-4 py-2 rounded-full text-sm font-sans font-medium mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-secondary-foreground animate-pulse" />
-            December 28, 2025 – January 4, 2026
+            December 8-24, 2026 
           </motion.div>
 
           {/* Main Title */}
@@ -91,12 +91,12 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary-foreground mb-6 leading-tight"
           >
-            2nd International{" "}
+            3rd International{" "}
             <span className="text-secondary">Ngyungne Retreat</span>
             <br />
             <span className="text-3xl md:text-4xl lg:text-5xl">&</span>
             <br />
-            1st Potala World Peace Prayers
+            2nd Potala World Peace Prayers
           </motion.h1>
 
           {/* Subtitle */}

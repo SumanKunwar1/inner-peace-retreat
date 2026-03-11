@@ -85,13 +85,13 @@ const Event = () => {
                 Historic International Event
               </span>
               <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-                2nd International Ngyungne Retreat
+                3rd International Ngyungne Retreat
               </h1>
               <h2 className="font-heading text-xl md:text-2xl text-primary mb-6">
-                & 1st Potala World Peace Prayers 2025
+                & 2nd Potala World Peace Prayers 2026
               </h2>
               <p className="font-body text-lg md:text-xl text-muted-foreground mb-8">
-                December 28, 2025 — January 4, 2026 • Jorpati, Kathmandu, Nepal
+                08-24 December, 2026 • Jorpati, Kathmandu, Nepal
               </p>
 
               {/* Countdown */}
