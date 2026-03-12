@@ -123,7 +123,7 @@ export function HeroSection() {
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-secondary" />
-              <span className="font-sans">8 Days of Transformation</span>
+              <span className="font-sans">16 Days of Transformation</span>
             </div>
           </motion.div>
 
