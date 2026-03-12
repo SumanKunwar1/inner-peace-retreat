@@ -40,13 +40,12 @@ export function Header() {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-crimson-deep flex items-center justify-center">
-                <span className="text-primary-foreground font-heading text-lg">ॐ</span>
-              </div>
-              <span className={`font-heading text-xl font-semibold ${showDarkText ? "text-primary" : "text-primary-foreground"}`}>
-                Ngyungne
-              </span>
+            <Link to="/" className="flex items-center">
+              <img
+                src="https://res.cloudinary.com/dihev9qxc/image/upload/v1773302232/ngyungne-removebg-preview_jxhtp1.png"
+                alt="Ngyungne Practice"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
           </motion.div>
 

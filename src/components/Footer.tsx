@@ -28,11 +28,12 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <span className="text-secondary-foreground font-heading text-lg">ॐ</span>
-              </div>
-              <span className="font-heading text-xl font-semibold">Ngyungne</span>
+            <Link to="/" className="flex items-center mb-4">
+              <img
+                src="https://res.cloudinary.com/dihev9qxc/image/upload/v1773302232/ngyungne-removebg-preview_jxhtp1.png"
+                alt="Ngyungne Practice"
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="font-body text-primary-foreground/80 text-sm mb-4">
               A sacred Buddhist purification practice dedicated to Avalokiteshvara, the Bodhisattva of Compassion.
