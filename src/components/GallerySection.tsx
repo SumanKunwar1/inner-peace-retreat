@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Play, Images, Film, X, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { retreats, type Retreat, type MediaItem } from "../data/Gallery";
+import { retreats, type Retreat, type MediaItem } from "@/data/gallery";
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 

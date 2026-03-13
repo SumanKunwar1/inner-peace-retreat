@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Play, Images, Film, X, ChevronLeft, ChevronRight, ArrowRight, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
-import { retreats, type Retreat, type MediaItem } from "@/data/Gallery";
+import { retreats, type Retreat, type MediaItem } from "@/data/gallery";
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 
