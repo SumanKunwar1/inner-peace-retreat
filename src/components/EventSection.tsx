@@ -92,7 +92,7 @@ export function EventSection() {
               <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 flex-1" asChild>
                 <Link to="/contact">Secure Your Spot</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 flex-1" asChild>
+                <Button size="lg" className="bg-primary-foreground text-secondary-foreground hover:bg-primary flex-1" asChild>
                 <Link to="/event">
                   Full Details <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>

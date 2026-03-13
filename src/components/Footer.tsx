@@ -39,7 +39,7 @@ export function Footer() {
               A sacred Buddhist purification practice dedicated to Avalokiteshvara, the Bodhisattva of Compassion.
             </p>
             <p className="font-body text-primary-foreground/60 text-sm">
-              2nd International Ngyungne Retreat<br />December 28, 2025 - January 4, 2026<br />Kathmandu, Nepal
+              3rd International Ngyungne Retreat<br />08-24 December, 2026<br />Kathmandu, Nepal
             </p>
           </div>
 
